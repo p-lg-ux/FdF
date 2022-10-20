@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.h                                            :+:      :+:    :+:   */
+/*   strtab.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 18:54:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/10/20 16:58:18 by pgros            ###   ########.fr       */
+/*   Created: 2022/10/20 17:08:37 by pgros             #+#    #+#             */
+/*   Updated: 2022/10/20 17:12:47 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINT_H
-# define POINT_H
+#include "fdf.h"
 
-typedef struct s_point2D
+void	__free_strtab(t_strtab tab)
 {
-	int	x;
-	int	y;
-}	t_point2D;
+	int	i;
 
-typedef struct s_point3D
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+int	__strtab_len(t_strtab tab)
 {
-	float	x;
-	float	y;
-	float	z;
-}	t_point3D;
+	int	i;
 
-#endif
+	i = 0;
+	while (tab[i] != NULL)
+		i++;
+	return (i);
+}

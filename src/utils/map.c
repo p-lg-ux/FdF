@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.h                                            :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 18:54:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/10/20 16:58:18 by pgros            ###   ########.fr       */
+/*   Created: 2022/10/20 17:38:14 by pgros             #+#    #+#             */
+/*   Updated: 2022/10/20 17:47:55 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINT_H
-# define POINT_H
+#include "fdf.h"
 
-typedef struct s_point2D
+void	__print_map(t_map *map)
 {
-	int	x;
-	int	y;
-}	t_point2D;
-
-typedef struct s_point3D
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_point3D;
-
-#endif
+	ft_printf("-------------------------\nMAP:\n");
+	if (map == NULL)
+	{
+		ft_printf("null\n-------------------------\n");
+		return ;
+	}
+	ft_printf("nb_lines = %i\n", map->nb_lines);
+	ft_printf("nb_columns = %i\n", map->nb_columns);
+}
