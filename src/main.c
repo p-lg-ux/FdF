@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:04:48 by pgros             #+#    #+#             */
-/*   Updated: 2022/10/20 18:07:02 by pgros            ###   ########.fr       */
+/*   Updated: 2022/10/21 17:12:52 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	map = parse(argv[1]);
+	__print_map(map);
+	__free_map(map);
 	return (0);
 	// int	fd;
 	// char *filename;

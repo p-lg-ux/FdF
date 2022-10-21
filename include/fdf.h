@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/10/20 17:46:29 by pgros            ###   ########.fr       */
+/*   Updated: 2022/10/21 17:13:39 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 #include	"mlx.h"
 #include 	"point.h"
 
-typedef char**	t_strtab;
+typedef char**		t_strtab;
+typedef	t_point3D**	t_maptab;
 
 typedef struct s_map
 {
@@ -29,7 +30,7 @@ typedef struct s_map
 	int			nb_columns;
 	t_point3D	*lowest;
 	t_point3D	*highest;
-	t_point3D	**map_tab;
+	t_maptab	maptab;
 }	t_map;
 
 t_map	*parse(char *filepath);
@@ -42,5 +43,8 @@ int		__strtab_len(t_strtab tab);
 
 //t_map
 void	__print_map(t_map *map);
+void	__free_maptab(t_maptab maptab);
+void	__free_map(t_map *map);
+
 
 #endif

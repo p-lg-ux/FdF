@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:38:14 by pgros             #+#    #+#             */
-/*   Updated: 2022/10/20 17:47:55 by pgros            ###   ########.fr       */
+/*   Updated: 2022/10/21 17:14:30 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,30 @@ void	__print_map(t_map *map)
 	}
 	ft_printf("nb_lines = %i\n", map->nb_lines);
 	ft_printf("nb_columns = %i\n", map->nb_columns);
+	ft_printf("-------------------------\n");
+}
+
+void	__free_maptab(t_maptab maptab)
+{
+	int	i;
+	
+	if (maptab == NULL)
+		return;
+	i = 0;
+	while (maptab[i] != NULL)
+	{
+		free(maptab[i]);
+		i++;
+	}
+	free(maptab);
+}
+void	__free_map(t_map *map)
+{
+	if (map->highest != NULL)
+		free(map->highest);
+	if (map->lowest != NULL)
+		free(map->lowest);
+	if (map->maptab != NULL)
+		__free_maptab(map->maptab);
+	free(map);
 }
