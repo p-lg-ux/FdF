@@ -1,0 +1,11 @@
+#LIB42
+lib42/
+
+#MLX
+minilibx-linux/
+
+#Executable
+fdf
+
+#Object files
+*.o
