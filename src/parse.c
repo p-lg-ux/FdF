@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:04:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/10/21 20:37:26 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/02 15:25:45 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	__fill_maptab(t_map	**map, int fd)
 void	__count_lines_columns(t_map **map, int fd)
 {
 	char		*line;
-	t_strtab	tab;
+	// t_strtab	tab;
 	int			len;
 
 	while (1)
@@ -29,7 +29,7 @@ void	__count_lines_columns(t_map **map, int fd)
 		if (line == NULL)
 			break ;
 		(*map)->nb_lines++;
-		tab = ft_split(line, ' ');
+		// tab = ft_split(line, ' ');
 		// len = __strtab_len(tab);
 		// if ((*map)->nb_columns == 0)
 		// 	(*map)->nb_columns = len;
@@ -39,7 +39,7 @@ void	__count_lines_columns(t_map **map, int fd)
 		// 		(*map)->nb_columns = -1;
 		// }
 		free(line);
-		__free_strtab(tab);
+		// __free_strtab(tab);
 	}
 }
 

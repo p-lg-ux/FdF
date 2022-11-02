@@ -37,14 +37,14 @@ MLX_FLAGS = -L./$(MLXDIR) -lmlx
 LIB42_FLAGS = -L./$(LIB42DIR) -l42
 LIBS_FLAGS = $(LIB42_FLAGS) $(MLX_FLAGS) -lXext -lX11 -lm
 
-CC = gcc
+CC = clang
 C_FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
-	mkdir -p ${@D}
-	$(CC) $(CFLAGS) $(I_FLAG) -c $< -o $@
+	@mkdir -p ${@D}
+	@$(CC) $(CFLAGS) $(I_FLAG) -c $< -o $@
 
 $(NAME): $(OBJS) $(LIB42) $(LIBMLX)
 	@echo -n "Compiling FdF"
