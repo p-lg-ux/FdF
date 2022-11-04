@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/02 17:22:11 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/04 17:17:03 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,11 @@
 #include	<fcntl.h>
 #include	"lib42.h"
 #include	"mlx.h"
-#include 	"point.h"
-
-typedef int		t_int2 __attribute__((ext_vector_type(2)));
-typedef int		t_int3 __attribute__((ext_vector_type(3)));
-typedef float	t_float2 __attribute__((ext_vector_type(2)));
-typedef float	t_float3 __attribute__((ext_vector_type(3)));
-typedef float	t_float4 __attribute__((ext_vector_type(4)));
+#include 	"geometry.h"
+#include 	"map.h"
 
 typedef char**		t_strtab;
-typedef	t_point3D**	t_maptab;
 
-typedef struct s_map
-{
-	int			nb_lines;
-	int			nb_columns;
-	t_point3D	*lowest;
-	t_point3D	*highest;
-	t_maptab	maptab;
-}	t_map;
 
 t_map	*parse(char *filepath);
 
@@ -51,6 +37,5 @@ int		__strtab_len(t_strtab tab);
 void	__print_map(t_map *map);
 void	__free_maptab(t_maptab maptab);
 void	__free_map(t_map *map);
-
 
 #endif

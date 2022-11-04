@@ -29,6 +29,10 @@ SRCS =	main.c \
 
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
+INCS_FILES = fdf.h
+
+INCS = $(addprefix ./include/, $(INCS_FILES))
+
 LIB42 = $(LIB42DIR)lib42.a
 LIBMLX = $(MLXDIR)libmlx.a
 
@@ -37,7 +41,7 @@ MLX_FLAGS = -L./$(MLXDIR) -lmlx
 LIB42_FLAGS = -L./$(LIB42DIR) -l42
 LIBS_FLAGS = $(LIB42_FLAGS) $(MLX_FLAGS) -lXext -lX11 -lm
 
-CC = clang
+CC = clang -fenable-matrix
 C_FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
@@ -46,7 +50,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p ${@D}
 	@$(CC) $(CFLAGS) $(I_FLAG) -c $< -o $@
 
-$(NAME): $(OBJS) $(LIB42) $(LIBMLX)
+$(NAME): $(OBJS) $(INCS) $(LIB42) $(LIBMLX)
 	@echo -n "Compiling FdF"
 	@$(CC) $(CFLAGS) $(I_FLAG) $(OBJS) $(LIBS_FLAGS) -o $@
 	@echo ${GREEN}"\t\tOK"${RESET}
@@ -65,10 +69,11 @@ $(LIB42) :
 clean:
 	rm -rf $(OBJDIR)
 	@make clean -s -C$(MLXDIR)
-	@make clean -s -C$(LIB42DIR)
+	@make clean -s -C$(LIB42DIR) > /dev/null 2>&1
 
 fclean: clean
 	rm -f $(NAME)
+	@make fclean -C$(LIB42DIR) > /dev/null 2>&1
 
 re: fclean all
 	make all

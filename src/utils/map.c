@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:38:14 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/02 15:23:26 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/04 17:23:03 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,21 @@ void	__print_map(t_map *map)
 	return ;
 }
 
-void	__free_maptab(t_maptab maptab)
-{
-	int	i;
+// void	__free_maptab(t_maptab maptab)
+// {
+// 	int	i;
 	
-	if (maptab == NULL)
-		return;
-	i = 0;
-	while (maptab[i] != NULL)
-	{
-		free(maptab[i]);
-		i++;
-	}
-	free(maptab);
-}
+// 	if (maptab == NULL)
+// 		return;
+// 	i = 0;
+// 	while (maptab[i] != NULL)
+// 	{
+// 		free(maptab[i]);
+// 		i++;
+// 	}
+// 	free(maptab);
+// }
+
 void	__free_map(t_map *map)
 {
 	if (map == NULL)
@@ -49,6 +50,6 @@ void	__free_map(t_map *map)
 	if (map->lowest != NULL)
 		free(map->lowest);
 	if (map->maptab != NULL)
-		__free_maptab(map->maptab);
+		free(map->maptab);
 	free(map);
 }

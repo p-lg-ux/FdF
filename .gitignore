@@ -9,3 +9,7 @@ fdf
 
 #Object files
 *.o
+
+#Others
+.vscode/
+maps/__MACOSX/
