@@ -25,11 +25,15 @@ RESET = "\033[m"
 SRCS =	main.c \
 		parse.c \
 		utils/strtab.c \
-		utils/map.c
+		utils/map.c \
+		utils/lstmap.c \
+		utils/geometry.c
 
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
-INCS_FILES = fdf.h
+INCS_FILES = fdf.h \
+				geometry.h \
+				map.h
 
 INCS = $(addprefix ./include/, $(INCS_FILES))
 
@@ -41,7 +45,7 @@ MLX_FLAGS = -L./$(MLXDIR) -lmlx
 LIB42_FLAGS = -L./$(LIB42DIR) -l42
 LIBS_FLAGS = $(LIB42_FLAGS) $(MLX_FLAGS) -lXext -lX11 -lm
 
-CC = clang -fenable-matrix
+CC = cc 
 C_FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/04 17:17:03 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/08 11:33:45 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		__strtab_len(t_strtab tab);
 
 //t_map
 void	__print_map(t_map *map);
-void	__free_maptab(t_maptab maptab);
+/*void	__free_maptab(t_maptab maptab);*/
 void	__free_map(t_map *map);
 
 #endif
