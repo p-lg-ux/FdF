@@ -23,11 +23,12 @@ GREEN = "\033[1;32m"
 RESET = "\033[m"
 
 SRCS =	main.c \
-		parse.c \
-		utils/strtab.c \
+		parsing/parse.c \
+		parsing/parse_bis.c \
 		utils/map.c \
 		utils/lstmap.c \
 		utils/geometry.c
+		# utils/strtab.c
 
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
