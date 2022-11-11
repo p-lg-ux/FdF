@@ -27,14 +27,16 @@ SRCS =	main.c \
 		parsing/parse_bis.c \
 		utils/map.c \
 		utils/lstmap.c \
-		utils/geometry.c
+		utils/geometry.c \
+		utils/color.c
 		# utils/strtab.c
 
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
 INCS_FILES = fdf.h \
 				geometry.h \
-				map.h
+				map.h \
+				color.h
 
 INCS = $(addprefix ./include/, $(INCS_FILES))
 

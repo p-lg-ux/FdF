@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:16:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/09 18:15:28 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/11 18:31:38 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define MAP_H
 
 #include "geometry.h"
+#include "color.h"
 
 typedef struct s_lstmap
 {
 	t_pointf3		*point3D;
+	t_color			*color;
 	struct s_lstmap	*next;
 }	t_lstmap;
 

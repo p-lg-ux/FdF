@@ -6,23 +6,28 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/09 14:23:35 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/11 19:21:14 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include	<stdlib.h>
-#include	<sys/types.h>
-#include	<sys/stat.h>
-#include	<fcntl.h>
-#include	"lib42.h"
-#include	"mlx.h"
-#include 	"geometry.h"
-#include 	"map.h"
+# include	<stdlib.h>
+# include	<sys/types.h>
+# include	<sys/stat.h>
+# include	<fcntl.h>
+# include	"lib42.h"
+# include	"mlx.h"
+# include 	"geometry.h"
+# include 	"map.h"
+# include	"color.h"
 
-// typedef char**		t_strtab;
+# define COLOR_MAX	0xfea542 //orange
+# define COLOR_MIN	0x55d3fa //blue
+# define D_R		169
+# define D_G		-46
+# define D_B		-184
 
 //	parse_bis.c
 void	__check_lowest(t_map **map, t_pointf3 *point3D);

@@ -6,14 +6,13 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:38:14 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/08 17:52:13 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/11 18:26:28 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 #include <stdlib.h>
 #include <stdio.h>
-
 
 void	__print_lstmap(t_lstmap *maptab)
 {
