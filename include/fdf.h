@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/11 19:21:14 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/14 16:27:18 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 
 # define COLOR_MAX	0xfea542 //orange
 # define COLOR_MIN	0x55d3fa //blue
+# define MAX_R		0xfe
+# define MAX_G		0xa5
+# define MAX_B		0x42
+# define MIN_R		0x55
+# define MIN_G		0xd3
+# define MIN_B		0xfa
 # define D_R		169
 # define D_G		-46
 # define D_B		-184
@@ -41,6 +47,11 @@ int		__count_columns(t_map **map, char *line);
 void	__count_lines_columns(t_map **map, int fd);
 void	__fill_map(t_map **map, int fd);
 t_map	*__parse(char *filepath);
+
+//	set_colors.c
+void	__set_colors(t_map *map);
+t_color	*__define_color(t_lstmap *node, t_map *map);
+t_color	*__compute_color(t_lstmap *node, t_map *map);
 
 //UTILS
 

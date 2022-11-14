@@ -25,6 +25,7 @@ RESET = "\033[m"
 SRCS =	main.c \
 		parsing/parse.c \
 		parsing/parse_bis.c \
+		parsing/set_colors.c \
 		utils/map.c \
 		utils/lstmap.c \
 		utils/geometry.c \

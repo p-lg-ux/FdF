@@ -6,10 +6,11 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:48:33 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/11 18:36:48 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/14 16:23:58 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lib42.h"
 #include "map.h"
 #include <stdlib.h>
 
@@ -17,7 +18,7 @@ t_lstmap	*__lstmap_new(t_pointf3 *point3D)
 {
 	t_lstmap	*new_node;
 
-	new_node = ft_calloc(1, sizeof(t_lstmap));
+	new_node = (t_lstmap *) ft_calloc(1, sizeof(t_lstmap));
 	if (!new_node)
 		return (new_node);
 	new_node->point3D = point3D;

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:16:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/11 18:31:38 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/14 16:04:49 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_map
 	int			nb_columns;
 	t_pointf3	*lowest;
 	t_pointf3	*highest;
+	int			range;
 	t_lstmap	*lstmap;
 	t_lstmap	*last;
 }	t_map;
