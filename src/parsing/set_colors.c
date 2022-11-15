@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:44:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/14 18:01:14 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/15 11:36:19 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_color	*__define_color(t_lstmap *node, t_map *map)
 	return (color);
 }
 
-void	__set_colors(t_map *map)
+int	__set_colors(t_map *map)
 {
 	t_lstmap	*node;
 
@@ -52,8 +52,9 @@ void	__set_colors(t_map *map)
 			node->color = to_t_color(COLOR_MAX);
 		else
 			node->color = __compute_color(node, map);
-		// if (node->color == NULL)
-		// TODO : define behavior in the case node->color == NULL
+		if (node->color == NULL)
+			return (1);
 		node = node->next;
 	}
+	return (0);
 }

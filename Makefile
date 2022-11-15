@@ -26,6 +26,8 @@ SRCS =	main.c \
 		parsing/parse.c \
 		parsing/parse_bis.c \
 		parsing/set_colors.c \
+		display/display.c \
+		display/handles.c \
 		utils/map.c \
 		utils/lstmap.c \
 		utils/geometry.c \
@@ -37,7 +39,8 @@ OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 INCS_FILES = fdf.h \
 				geometry.h \
 				map.h \
-				color.h
+				color.h \
+				display.h
 
 INCS = $(addprefix ./include/, $(INCS_FILES))
 
@@ -50,7 +53,7 @@ LIB42_FLAGS = -L./$(LIB42DIR) -l42
 LIBS_FLAGS = $(LIB42_FLAGS) $(MLX_FLAGS) -lXext -lX11 -lm
 
 CC = cc 
-C_FLAGS = -Wall -Wextra -Werror
+C_FLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME)
 

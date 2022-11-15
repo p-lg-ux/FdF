@@ -6,15 +6,15 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:16:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/14 16:04:49 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/15 11:53:48 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
 
-#include "geometry.h"
-#include "color.h"
+# include "geometry.h"
+# include "color.h"
 
 typedef struct s_lstmap
 {
