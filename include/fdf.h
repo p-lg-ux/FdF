@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/15 11:42:59 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/16 20:13:42 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		__nblen(char *line);
 int		__is_nb_start(char *line, int i);
 
 //	parse.c
-int		__add_point_to_map(t_map **map, float x, float y, float z);
+int		__add_point_to_map(t_map **map, int x, int y, int z);
 int		__count_columns(t_map **map, char *line);
 void	__count_lines_columns(t_map **map, int fd);
 void	__fill_map(t_map **map, int fd);

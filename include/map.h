@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:16:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/15 11:53:48 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/16 20:22:06 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ void		__lstmap_clear(t_lstmap **lst);
 void		__free_map(t_map *map);
 void		__print_map(t_map *map);
 void		__print_lstmap(t_lstmap *maptab);
-
 
 #endif

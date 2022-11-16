@@ -6,13 +6,13 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:04:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/14 16:08:06 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/16 20:12:55 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	__add_point_to_map(t_map **map, float x, float y, float z)
+int	__add_point_to_map(t_map **map, int x, int y, int z)
 {
 	t_pointf3	*point3d;
 	t_lstmap	*new;

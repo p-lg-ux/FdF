@@ -27,6 +27,7 @@ SRCS =	main.c \
 		parsing/parse_bis.c \
 		parsing/set_colors.c \
 		display/display.c \
+		display/display_map.c \
 		display/handles.c \
 		utils/map.c \
 		utils/lstmap.c \

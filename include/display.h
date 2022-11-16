@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:41:00 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/15 18:49:41 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/16 19:47:43 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,18 @@ typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	// t_img	img;
-	// t_map	*map;
+	t_img	img;
+	t_map	*map;
 }	t_data;
 
 int		handle_no_event(t_data *data);
 int		handle_leave(t_data *data);
+int		handle_keypress(int keysym, t_data *data);
 
 void	__mlx_display(t_data *data);
 int		__initialize(t_data *data);
-
+void	__set_hooks(t_data *data);
+void	__img_pix_put(t_img *img, int x, int y, int color);
+void	__put_map_to_im(t_data *data);
 
 #endif

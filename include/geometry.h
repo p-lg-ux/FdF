@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:54:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/08 16:07:38 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/16 20:10:28 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@
 
 typedef struct s_pointf3
 {
-	float	x;
-	float	y;
-	float	z;
+	int	x;
+	int	y;
+	int	z;
 }	t_pointf3;
 
 void	__print_pointf3(t_pointf3 *p);

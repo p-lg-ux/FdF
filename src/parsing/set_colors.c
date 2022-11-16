@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:44:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/15 11:36:19 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/16 19:41:21 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ t_color	*__compute_color(t_lstmap *node, t_map *map)
 	int		B;
 	float	portion;
 
-	portion = (node->point3D->z - map->highest->z) / map->range;
-	R = MIN_R + portion * D_R ; 
+	portion = (node->point3D->z - map->highest->z) / ((float) (map->range));
+	R = MIN_R + portion * D_R ;
 	G = MIN_G + portion * D_G ;
-	B = MIN_B + portion * D_B ; 
+	B = MIN_B + portion * D_B ;
 	return (to_t_color(R << 16 + G << 8 + B));
 }
 
