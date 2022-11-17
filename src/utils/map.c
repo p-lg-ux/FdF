@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:38:14 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/11 18:26:28 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/17 15:09:18 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	__print_lstmap(t_lstmap *maptab)
 	while (maptab != NULL && i < 700)
 	{
 		i++;
-		__print_pointf3(maptab->point3D);
+		__print_point_i3(maptab->point3D);
+		printf("\tR, G, B = %i, %i, %i", maptab->color->R, maptab->color->G, maptab->color->B);
+		printf("\tcolor = %X", maptab->color->val);
 		printf("\n");
 		maptab = maptab->next;
 	}
@@ -42,13 +44,13 @@ void	__print_map(t_map *map)
 	if (map->highest != NULL)
 	{
 		printf("highest = ");
-		__print_pointf3(map->highest);
+		__print_point_i3(map->highest);
 		printf("\n");
 	}
 	if (map->lowest != NULL)
 	{
 		printf("lowest = ");
-		__print_pointf3(map->lowest);
+		__print_point_i3(map->lowest);
 		printf("\n");
 	}
 	if (map->lstmap != NULL)

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/16 20:13:42 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/17 15:09:18 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define D_B			-184
 
 //	parse_bis.c
-void	__check_lowest(t_map **map, t_pointf3 *point3D);
-void	__check_highest(t_map **map, t_pointf3 *point3D);
+void	__check_lowest(t_map **map, t_point_i3 *point3D);
+void	__check_highest(t_map **map, t_point_i3 *point3D);
 int		__nblen(char *line);
 int		__is_nb_start(char *line, int i);
 

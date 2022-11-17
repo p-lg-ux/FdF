@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:48:33 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/14 16:23:58 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/17 15:09:18 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "map.h"
 #include <stdlib.h>
 
-t_lstmap	*__lstmap_new(t_pointf3 *point3D)
+t_lstmap	*__lstmap_new(t_point_i3 *point3D)
 {
 	t_lstmap	*new_node;
 

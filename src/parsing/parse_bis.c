@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:43:07 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/11 18:44:22 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/17 15:09:18 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	__is_nb_start(char *line, int i)
 	return (0);
 }
 
-void	__check_highest(t_map **map, t_pointf3 *point3D)
+void	__check_highest(t_map **map, t_point_i3 *point3D)
 {
 	if ((*map)->highest == NULL)
 		(*map)->highest = point3D;
@@ -50,7 +50,7 @@ void	__check_highest(t_map **map, t_pointf3 *point3D)
 	return ;
 }
 
-void	__check_lowest(t_map **map, t_pointf3 *point3D)
+void	__check_lowest(t_map **map, t_point_i3 *point3D)
 {
 	if ((*map)->lowest == NULL)
 		(*map)->lowest = point3D;

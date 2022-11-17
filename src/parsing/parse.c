@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:04:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/16 20:12:55 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/17 15:09:18 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	__add_point_to_map(t_map **map, int x, int y, int z)
 {
-	t_pointf3	*point3d;
+	t_point_i3	*point3d;
 	t_lstmap	*new;
 
-	point3d = malloc(sizeof(t_pointf3));
+	point3d = malloc(sizeof(t_point_i3));
 	if (point3d == NULL)
 		return (-1);
 	point3d->x = x;
@@ -88,7 +88,7 @@ void	__count_lines_columns(t_map **map, int fd)
 void	__fill_map(t_map **map, int fd)
 {
 	__count_lines_columns(map, fd);
-	(*map)->range = (int)((*map)->highest->z) - (int)((*map)->highest->z);
+	(*map)->range = (int)((*map)->highest->z) - (int)((*map)->lowest->z);
 	if ((*map)->nb_lines <= 0 || (*map)->nb_columns <= 0)
 	{
 		__free_map(*map);
