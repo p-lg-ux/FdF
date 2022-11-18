@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:01:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/16 19:30:16 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/18 18:21:36 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	__img_pix_put(t_img *img, int x, int y, int color)
 {
 	char    *pixel;
 
+	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+		return ;
     pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(int *)pixel = color;
 }
@@ -55,7 +57,10 @@ void	__mlx_display(t_data *data)
 		printf("init error"); //TODO : remove printf
 		handle_leave(data);
 	}
+	__isometric_projection(data);
 	__set_hooks(data);
+	__put_map_to_im(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
