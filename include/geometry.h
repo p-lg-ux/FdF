@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:54:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/18 18:55:23 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/19 15:04:52 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define Z_AXIS	2
 # define SCALE	3
 
-# define ALPHA	35.26
-# define BETA	-45.0
+# define ALPHA	-0.610865
+# define BETA	-0.785398
 
 typedef	float	t_matrix[3][3];
 

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:44:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/17 13:38:31 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/19 16:18:08 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,42 @@ t_color	*__compute_color(t_lstmap *node, t_map *map)
 	return (to_t_color((R << 16) + (G << 8) + B));
 }
 
-// t_color	*__define_color(t_lstmap *node, t_map *map)
-// {
-// 	t_color	*color;
+t_color	*__define_color(t_lstmap *node, t_map *map)
+{
+	t_color	*color;
 
-// 	if (node->point3D->z == map->lowest->z)
-// 		color = to_t_color(COLOR_MIN);
-// 	else if (node->point3D->z == map->highest->z)
-// 		color = to_t_color(COLOR_MAX);
-// 	else
-// 		color = __compute_color(node, map);
-// 	return (color);
-// }
+	if (node->point3D->z == map->lowest->z)
+		color = to_t_color(COLOR_MIN);
+	else if (node->point3D->z == map->highest->z)
+		color = to_t_color(COLOR_MAX);
+	else
+		color = __compute_color(node, map);
+	return (color);
+}
+
+void	__set_links(t_lstmap *node, t_map *map)
+{
+	int			i;
+	t_lstmap	*tmp;
+	
+	if (node->point3D->y == map->nb_columns - 1)
+		node->right = NULL;
+	else
+		node->right = node->next;
+	if (node->point3D->x == map->nb_lines - 1)
+		node->down = NULL;
+	else
+	{
+		i = 0;
+		tmp = node;
+		while (i < map->nb_columns && tmp != NULL)
+		{
+			tmp = tmp->next;
+			i++;
+		}
+		node->down = tmp;
+	}
+}
 
 int	__set_colors(t_map *map)
 {
@@ -48,15 +72,11 @@ int	__set_colors(t_map *map)
 	node = map->lstmap;
 	while (node != NULL)
 	{
-		if (node->point3D->z == map->lowest->z)
-			node->color = to_t_color(COLOR_MIN);
-		else if (node->point3D->z == map->highest->z)
-			node->color = to_t_color(COLOR_MAX);
-		else
-			node->color = __compute_color(node, map);
+		node->color = __define_color(node, map);
 		if (node->color == NULL)
 			return (1);
 		// printf("R, G, B = %i, %i, %i\tcolor = %X\n", node->color->R, node->color->G, node->color->B, node->color->val);
+		__set_links(node, map);
 		node = node->next;
 	}
 	return (0);

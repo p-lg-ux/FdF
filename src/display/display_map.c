@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:34:18 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/18 18:57:00 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/19 16:31:59 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 //TODO : ajouter un vecteur de translation
-void	__apply_transform_to_map(t_data *data, t_matrix *transform)
+void	__apply_transform_to_map(t_data *data, t_matrix *transform, t_point_i3 *translation)
 {
 	t_lstmap *node;
 
@@ -22,6 +22,9 @@ void	__apply_transform_to_map(t_data *data, t_matrix *transform)
 	while (node != NULL)
 	{
 		__mat_vect_product(*transform, node->point3D);
+		node->point3D->x += translation->x;
+		node->point3D->y += translation->y;
+		node->point3D->z += translation->z;
 		node = node->next;
 	}
 }
@@ -29,6 +32,7 @@ void	__apply_transform_to_map(t_data *data, t_matrix *transform)
 //TODO : tester les combinaisons de rotation et ajouter une tranlation pour centrer l'affichage des tests
 void	__isometric_projection(t_data *data)
 {
+	const int		translate[3] = {WINDOW_HEIGHT/2, WINDOW_WIDTH/2, 0};
 	t_matrix		tmp;
 	t_matrix		affine;
 	t_rot_matrix	*rot_z;
@@ -39,22 +43,24 @@ void	__isometric_projection(t_data *data)
 	rot_z = __new_rot_matrix(Z_AXIS, BETA);
 	if (rot_z == NULL)
 		return ;
-	rot_y = __new_rot_matrix(X_AXIS, ALPHA);
+	rot_y = __new_rot_matrix(Y_AXIS, ALPHA);
+	// rot_y = __new_rot_matrix(Y_AXIS, -atanf(sqrtf(2.0)/2.0));
 	if (rot_y == NULL)
 		return (free(rot_z));
 	scale = __new_rot_matrix(SCALE, 10.0);
 	if (scale == NULL)
 		return (free(rot_z), free(rot_y));
-	__matrix_product(&tmp, rot_z->mat, rot_y->mat);
+	printf("z angle = %f\n y angle = %f\n", rot_z->angle, rot_y->angle);
+	__matrix_product(&tmp, rot_y->mat, rot_z->mat);
 	printf("tmp =\n");
 	__print_matrix(tmp);
 	printf("\n");
-	__matrix_product(&affine, scale->mat, tmp);
+	__matrix_product(&affine, tmp, scale->mat);
 	// affine = &(scale->mat);
 	printf("affine =\n");
 	__print_matrix(affine);
 	printf("\n");
-	__apply_transform_to_map(data, &affine);
+	__apply_transform_to_map(data, &affine, (t_point_i3 *)(translate));
 	free(rot_z);
 	free(rot_y);
 	free(scale);

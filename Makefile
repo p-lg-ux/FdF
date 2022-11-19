@@ -87,7 +87,7 @@ fclean: clean
 	rm -f $(NAME)
 	@make fclean -C$(LIB42DIR) > /dev/null 2>&1
 
-re: fclean all
+re: fclean
 	make all
 	
 .PHONY: all clean fclean re 
