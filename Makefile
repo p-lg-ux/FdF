@@ -29,6 +29,7 @@ SRCS =	main.c \
 		display/display.c \
 		display/display_map.c \
 		display/handles.c \
+		display/segment.c \
 		utils/map.c \
 		utils/lstmap.c \
 		utils/geometry.c \

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:34:18 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/19 16:31:59 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/21 14:00:30 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	__isometric_projection(t_data *data)
 	// rot_y = __new_rot_matrix(Y_AXIS, -atanf(sqrtf(2.0)/2.0));
 	if (rot_y == NULL)
 		return (free(rot_z));
-	scale = __new_rot_matrix(SCALE, 10.0);
+	scale = __new_rot_matrix(SCALE, 20.0);
 	if (scale == NULL)
 		return (free(rot_z), free(rot_y));
 	printf("z angle = %f\n y angle = %f\n", rot_z->angle, rot_y->angle);
@@ -76,6 +76,10 @@ void	__put_map_to_im(t_data *data)
 	{
 		// printf("x = %i\t y = %i\tcolor = %X\n", node->point3D->x, node->point3D->y, node->color->val);
 		__img_pix_put(&(data->img), node->point3D->y, node->point3D->x, node->color->val);
+		if (node->right != NULL)
+			__trace_segment(data, node, node->right);
+		if (node->down != NULL)
+			__trace_segment(data, node, node->down);
 		node = node->next;
 	}
 }

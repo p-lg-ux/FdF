@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:41:00 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/19 14:00:14 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/21 13:43:50 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,8 @@ void	__put_map_to_im(t_data *data);
 
 void	__apply_transform_to_map(t_data *data, t_matrix *transform, t_point_i3 *translation);
 void	__isometric_projection(t_data *data);
+
+void	__trace_segment(t_data *data, t_lstmap *A, t_lstmap *B);
+int		__degrade_color(t_color *begin, const float dRGB[3], int i, int step);
 
 #endif
