@@ -6,12 +6,31 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:01:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/18 18:21:36 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/23 18:37:41 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include <stdio.h>
+
+void	__reset_background(t_img *img)
+{
+	int	j;
+	int	i;
+
+	j = 0;
+	i = 0;
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		while (j < WINDOW_WIDTH)
+		{
+			__img_pix_put(img, j, i, 0x000000);
+			j++;
+		}
+		i++;
+	}
+}
 
 void	__img_pix_put(t_img *img, int x, int y, int color)
 {

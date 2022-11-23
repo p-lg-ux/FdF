@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/22 17:58:47 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/23 13:39:47 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,9 @@ t_scale_matrix	*__new_scale_matrix(float *scale)
 	scale_mat->scale[1] = scale[1];
 	scale_mat->scale[2] = scale[2];
 	__fill_scale_mat(scale_mat);
-	printf("scale matrix =\n");
-	__print_matrix(scale_mat->mat);
-	printf("\n");
+	// printf("scale matrix =\n");
+	// __print_matrix(scale_mat->mat);
+	// printf("\n");
 	return (scale_mat);
 }
 
@@ -191,13 +191,13 @@ void	__multiple_mat_product(t_matrix *res, t_matrix **mat_tab)
 	if (mat_tab == NULL || *mat_tab == NULL)
 		return ;
 
-	printf("mat_tab[0] =\n");
-	__print_matrix(*(mat_tab[0]));
-	printf("\n");
+	// printf("mat_tab[0] =\n");
+	// __print_matrix(*(mat_tab[0]));
+	// printf("\n");
 	
-	printf("mat_tab[1] =\n");
-	__print_matrix(*(mat_tab[1]));
-	printf("\n");
+	// printf("mat_tab[1] =\n");
+	// __print_matrix(*(mat_tab[1]));
+	// printf("\n");
 	
 	__matrix_product(res, *(mat_tab[1]), *(mat_tab[0]));
 	i = 2;

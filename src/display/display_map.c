@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:34:18 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/22 19:14:13 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/23 18:39:33 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void	__apply_transform_to_map(t_data *data, t_matrix *transform)
 	while (node != NULL)
 	{
 		__mat_vect_product(*transform, node->point3D);
-		// node->point3D->x += translation->x;
-		// node->point3D->y += translation->y;
-		// node->point3D->z += translation->z;
 		node = node->next;
 	}
 }
@@ -33,7 +30,8 @@ void	__isometric_projection(t_data *data)
 	const float		translate_v[3] = {-(data->map->nb_lines/2), -(data->map->nb_columns/2), 0.0};
 	const float		center_v[3] = {WINDOW_HEIGHT / 2, WINDOW_WIDTH / 2, 0.0};
 	const float		s = fminf(WINDOW_HEIGHT / (data->map->nb_lines * 2.0), WINDOW_WIDTH / (data->map->nb_columns * 2.0));
-	const float		scale_v[3] = {s, s, s / 2.0};
+	const float		scale_v[3] = {s, s, s * (fminf(data->map->nb_lines, data->map->nb_columns) / (2 * data->map->range))}; //TODO : attention division par zero
+	
 	t_matrix		*mat_tab[6];
 	t_matrix		affine;
 	t_translation_matrix *translate;
@@ -67,10 +65,11 @@ void	__isometric_projection(t_data *data)
 	mat_tab[1] = &(scale->mat);
 	mat_tab[2] = &(rot_z->mat);
 	mat_tab[3] = &(rot_y->mat);
-	mat_tab[4] = &(center->mat);
-	mat_tab[5] = NULL;
+	// mat_tab[4] = &(center->mat);
+	// mat_tab[5] = NULL;
+	mat_tab[4] = NULL;
 	
-	printf("z angle = %f\n y angle = %f\n", rot_z->angle, rot_y->angle);
+	// printf("z angle = %f\n y angle = %f\n", rot_z->angle, rot_y->angle);
 	// __matrix_product(&tmp, rot_y->mat, rot_z->mat);
 	// printf("tmp =\n");
 	// __print_matrix(tmp);
@@ -78,9 +77,9 @@ void	__isometric_projection(t_data *data)
 	// __matrix_product(&affine, tmp, scale->mat);
 	// affine = &(scale->mat);
 	__multiple_mat_product(&affine, (t_matrix **)mat_tab);
-	printf("affine =\n");
-	__print_matrix(affine);
-	printf("\n");
+	// printf("affine =\n");
+	// __print_matrix(affine);
+	// printf("\n");
 	__apply_transform_to_map(data, &affine);
 	free(rot_z);
 	free(rot_y);
@@ -93,12 +92,15 @@ void	__put_map_to_im(t_data *data)
 {
 	t_lstmap *node;
 
+	__reset_background(&(data->img));
 	node = data->map->lstmap;
 	// printf("data->img = %p\n", &(data->img));
 	while (node != NULL)
 	{
 		// printf("x = %i\t y = %i\tcolor = %X\n", node->point3D->x, node->point3D->y, node->color->val);
-		__img_pix_put(&(data->img), node->point3D->y, node->point3D->x, node->color->val);
+		__img_pix_put(&(data->img), node->point3D->y + (WINDOW_WIDTH / 2),
+			node->point3D->x + (WINDOW_HEIGHT / 2),
+			node->color->val);
 		if (node->right != NULL)
 			__trace_segment(data, node, node->right);
 		if (node->down != NULL)

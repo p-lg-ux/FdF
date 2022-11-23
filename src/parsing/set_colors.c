@@ -6,11 +6,27 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:44:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/19 16:18:08 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/23 16:06:07 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+// t_color	*__compute_color(t_lstmap *node, t_map *map)
+// {
+// 	int		R;
+// 	int		G;
+// 	int		B;
+// 	float	portion;
+
+// 	portion = (node->point3D->z - map->lowest->z) / ((float) (map->range));
+// 	// printf("portion = %f\t", portion);
+// 	R = MIN_R + portion * D_R ;
+// 	G = MIN_G + portion * D_G ;
+// 	B = MIN_B + portion * D_B ;
+// 	// printf("R, G, B = %i, %i, %i\n", R, G, B);
+// 	return (to_t_color((R << 16) + (G << 8) + B));
+// }
 
 t_color	*__compute_color(t_lstmap *node, t_map *map)
 {
@@ -20,12 +36,38 @@ t_color	*__compute_color(t_lstmap *node, t_map *map)
 	float	portion;
 
 	portion = (node->point3D->z - map->lowest->z) / ((float) (map->range));
-	// printf("portion = %f\t", portion);
-	R = MIN_R + portion * D_R ;
-	G = MIN_G + portion * D_G ;
-	B = MIN_B + portion * D_B ;
-	// printf("R, G, B = %i, %i, %i\n", R, G, B);
-	return (to_t_color((R << 16) + (G << 8) + B));
+	if (portion < 0.25)
+	{
+		portion = portion / 0.25;
+		R = 0;
+		G = 0 + portion * 255;
+		B = 255;
+		return (to_t_color((R << 16) + (G << 8) + B));
+	}
+	else if (portion >= 0.25 && portion < 0.5)
+	{
+		portion = (portion - 0.25) / 0.25;
+		R = 0;
+		G = 255;
+		B = 255 - portion * 255;
+		return (to_t_color((R << 16) + (G << 8) + B));
+	}
+	else if (portion >= 0.5 && portion < 0.75)
+	{
+		portion = (portion - 0.5) / 0.25;
+		R = 0 + portion * 255;
+		G = 255;
+		B = 0;
+		return (to_t_color((R << 16) + (G << 8) + B));
+	}
+	else
+	{
+		portion = (portion - 0.75) / 0.25;
+		R = 255;
+		G = 255 - portion * 255;
+		B = 0;
+		return (to_t_color((R << 16) + (G << 8) + B));
+	}
 }
 
 t_color	*__define_color(t_lstmap *node, t_map *map)

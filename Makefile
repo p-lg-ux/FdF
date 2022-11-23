@@ -90,5 +90,8 @@ fclean: clean
 
 re: fclean
 	make all
+
+debug: $(LIB42) $(LIBMLX)
+	$(CC) $(CFLAGS) $(I_FLAG) $(addprefix $(SRCDIR), $(SRCS)) $(LIBS_FLAGS) -o fdf_debug
 	
 .PHONY: all clean fclean re 

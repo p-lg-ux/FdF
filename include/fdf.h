@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/17 15:09:18 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/23 15:32:03 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,30 @@
 # include	"color.h"
 # include	"display.h"
 
-# define COLOR_MAX		0xfea542 //orange
-# define COLOR_MIN		0x55d3fa //blue
-# define MAX_R			0xfe
-# define MAX_G			0xa5
-# define MAX_B			0x42
-# define MIN_R			0x55
-# define MIN_G			0xd3
-# define MIN_B			0xfa
-# define D_R			169
-# define D_G			-46
-# define D_B			-184
+// # define COLOR_MAX		0xfea542 //orange
+// # define COLOR_MIN		0x55d3fa //blue
+// # define MAX_R			0xfe
+// # define MAX_G			0xa5
+// # define MAX_B			0x42
+// # define MIN_R			0x55
+// # define MIN_G			0xd3
+// # define MIN_B			0xfa
+// # define D_R			169
+// # define D_G			-46
+// # define D_B			-184
+
+# define COLOR_MAX		0xff0000 //red
+# define COLOR_MIN		0x0000ff //blue
+# define D_COLOR        0xfeff01
+# define MAX_R			0xff
+# define MAX_G			0x00
+# define MAX_B			0x00
+# define MIN_R			0x00
+# define MIN_G			0x00
+# define MIN_B			0xff
+# define D_R			255
+# define D_G			0
+# define D_B		    -255
 
 //	parse_bis.c
 void	__check_lowest(t_map **map, t_point_i3 *point3D);

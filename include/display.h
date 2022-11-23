@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:41:00 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/22 16:59:24 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/23 18:38:52 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		handle_keypress(int keysym, t_data *data);
 void	__mlx_display(t_data *data);
 int		__initialize(t_data *data);
 void	__set_hooks(t_data *data);
+void	__reset_background(t_img *img);
 void	__img_pix_put(t_img *img, int x, int y, int color);
 void	__put_map_to_im(t_data *data);
 
