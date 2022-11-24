@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/23 15:32:03 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/24 17:50:08 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@
 # define D_R			255
 # define D_G			0
 # define D_B		    -255
+
+//for check secu malloc
+// # define malloc(...) 0
 
 //	parse_bis.c
 void	__check_lowest(t_map **map, t_point_i3 *point3D);

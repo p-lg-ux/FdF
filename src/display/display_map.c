@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:34:18 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/23 18:39:33 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/24 18:22:33 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,41 @@ void	__apply_transform_to_map(t_data *data, t_matrix *transform)
 	}
 }
 
+void	__center_scale(t_data *data)
+{
+	const float		translate_v[3] = {-(data->map->nb_lines/2),
+		-(data->map->nb_columns/2), 0.0};
+	const float		s = fminf(WINDOW_HEIGHT / (data->map->nb_lines * 2.0),
+		WINDOW_WIDTH / (data->map->nb_columns * 2.0));
+	const float		scale_v[3] = {s, s,
+		s * (fminf(data->map->nb_lines, data->map->nb_columns) /
+		(2 * (data->map->range + 1)))}; //TODO : attention division par zero
+	// t_matrix		*mat_tab[3];
+	t_scale_matrix	*scale;
+	t_translation_matrix *translate;
+	t_matrix		affine;
+	
+	scale = __new_scale_matrix((float *)scale_v);
+	if (scale == NULL)
+		return (__quit(data, EXIT_FAILURE));
+	translate = __new_translation_matrix((float *)translate_v);
+	if (translate == NULL)
+		return (free(scale), __quit(data, EXIT_FAILURE));
+	
+	__multiple_mat_product(&affine, (t_matrix *[]){ &(translate->mat), &(scale->mat), NULL});
+	__apply_transform_to_map(data, &affine);
+	free(scale);
+	free(translate);
+}
+
 void	__isometric_projection(t_data *data)
 {
-	const float		translate_v[3] = {-(data->map->nb_lines/2), -(data->map->nb_columns/2), 0.0};
 	const float		center_v[3] = {WINDOW_HEIGHT / 2, WINDOW_WIDTH / 2, 0.0};
-	const float		s = fminf(WINDOW_HEIGHT / (data->map->nb_lines * 2.0), WINDOW_WIDTH / (data->map->nb_columns * 2.0));
-	const float		scale_v[3] = {s, s, s * (fminf(data->map->nb_lines, data->map->nb_columns) / (2 * data->map->range))}; //TODO : attention division par zero
 	
 	t_matrix		*mat_tab[6];
 	t_matrix		affine;
-	t_translation_matrix *translate;
 	t_rot_matrix	*rot_z;
 	t_rot_matrix	*rot_y;
-	t_scale_matrix	*scale;
 	t_translation_matrix *center;
 
 	rot_z = __new_rot_matrix(Z_AXIS, BETA);
@@ -46,28 +68,20 @@ void	__isometric_projection(t_data *data)
 	rot_y = __new_rot_matrix(Y_AXIS, ALPHA);
 	if (rot_y == NULL)
 		return (free(rot_z));
-	scale = __new_scale_matrix((float *)scale_v);
-	if (scale == NULL)
-		return (free(rot_z), free(rot_y));
-	translate = __new_translation_matrix((float *)translate_v);
-	if (translate == NULL)
-		return (free(scale), free(rot_z), free(rot_y));
 	center = __new_translation_matrix((float *)center_v);
 	if (center == NULL)
-		return (free(translate),free(scale), free(rot_z), free(rot_y));
+		return (free(rot_z), free(rot_y));
 	// printf("translate =\n");
 	// __print_matrix(translate->mat);
 	// printf("\n");
 	// printf("scale =\n");
 	// __print_matrix(scale->mat);
 	// printf("\n");
-	mat_tab[0] = &(translate->mat);
-	mat_tab[1] = &(scale->mat);
-	mat_tab[2] = &(rot_z->mat);
-	mat_tab[3] = &(rot_y->mat);
+	mat_tab[0] = &(rot_z->mat);
+	mat_tab[1] = &(rot_y->mat);
 	// mat_tab[4] = &(center->mat);
 	// mat_tab[5] = NULL;
-	mat_tab[4] = NULL;
+	mat_tab[2] = NULL;
 	
 	// printf("z angle = %f\n y angle = %f\n", rot_z->angle, rot_y->angle);
 	// __matrix_product(&tmp, rot_y->mat, rot_z->mat);
@@ -83,8 +97,6 @@ void	__isometric_projection(t_data *data)
 	__apply_transform_to_map(data, &affine);
 	free(rot_z);
 	free(rot_y);
-	free(scale);
-	free(translate);
 	free(center);
 }
 
@@ -92,15 +104,15 @@ void	__put_map_to_im(t_data *data)
 {
 	t_lstmap *node;
 
-	__reset_background(&(data->img));
+	__reset_background(data);
 	node = data->map->lstmap;
 	// printf("data->img = %p\n", &(data->img));
 	while (node != NULL)
 	{
 		// printf("x = %i\t y = %i\tcolor = %X\n", node->point3D->x, node->point3D->y, node->color->val);
-		__img_pix_put(&(data->img), node->point3D->y + (WINDOW_WIDTH / 2),
-			node->point3D->x + (WINDOW_HEIGHT / 2),
-			node->color->val);
+		// __img_pix_put(&(data->img), node->point3D->y + (WINDOW_WIDTH / 2),
+		// 	node->point3D->x + (WINDOW_HEIGHT / 2),
+		// 	node->color->val);
 		if (node->right != NULL)
 			__trace_segment(data, node, node->right);
 		if (node->down != NULL)

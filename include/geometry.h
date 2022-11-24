@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:54:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/22 16:55:33 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/24 18:21:58 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,5 @@ void			__fill_xrot_mat(t_rot_matrix *rot_mat);
 void			__fill_yrot_mat(t_rot_matrix *rot_mat);
 void			__fill_zrot_mat(t_rot_matrix *rot_mat);
 void			__mat_vect_product(t_matrix mat, t_point_i3 *vect);
-void			__multiple_mat_product(t_matrix *res, t_matrix **mat_tab);
+void			__multiple_mat_product(t_matrix *res, t_matrix *mat_tab[]);
 #endif

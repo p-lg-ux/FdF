@@ -6,13 +6,30 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:58:53 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/23 18:43:12 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/24 17:49:01 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include "stdio.h"
 #include "unistd.h"
+
+//TODO : check if pointers are not null before destroying or freeing
+void	__quit(t_data *data, int exit_code)
+{
+	if (data->mlx_ptr != NULL)
+	{
+		if (data->img.mlx_img != NULL)
+			mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+		if (data->win_ptr != NULL)
+			mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);	
+	}
+	__free_map(data->map);
+	exit (exit_code); 
+	return ;
+}
 
 void	__rotate_map(t_data *data, int axis, float angle)
 {
@@ -32,12 +49,7 @@ int	handle_no_event(t_data *data)
 
 int	handle_leave(t_data *data)
 {
-	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	__free_map(data->map);
-	exit (0);
+	__quit(data, EXIT_SUCCESS);
 	return (0);
 }
 

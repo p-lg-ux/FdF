@@ -6,30 +6,22 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:01:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/23 18:37:41 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/24 18:16:44 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include <stdio.h>
 
-void	__reset_background(t_img *img)
+void	__reset_background(t_data *data)
 {
-	int	j;
-	int	i;
-
-	j = 0;
-	i = 0;
-	while (i < WINDOW_HEIGHT)
-	{
-		j = 0;
-		while (j < WINDOW_WIDTH)
-		{
-			__img_pix_put(img, j, i, 0x000000);
-			j++;
-		}
-		i++;
-	}
+	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (data->img.mlx_img == NULL)
+		__quit(data, EXIT_FAILURE);
+	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &(data->img.bpp),
+		&(data->img.line_len), &(data->img.endian));
+	return ;
 }
 
 void	__img_pix_put(t_img *img, int x, int y, int color)
@@ -76,7 +68,8 @@ void	__mlx_display(t_data *data)
 		printf("init error"); //TODO : remove printf
 		handle_leave(data);
 	}
-	__isometric_projection(data);
+	__center_scale(data);
+	// __isometric_projection(data);
 	__set_hooks(data);
 	__put_map_to_im(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
