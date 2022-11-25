@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:34:18 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/24 18:22:33 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/25 17:56:33 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	__apply_transform_to_map(t_data *data, t_matrix *transform)
 {
-	t_lstmap *node;
+	t_lstmap	*node;
 
 	node = data->map->lstmap;
 	while (node != NULL)
@@ -25,28 +25,42 @@ void	__apply_transform_to_map(t_data *data, t_matrix *transform)
 	}
 }
 
+void	__apply_transform(t_data *data, t_matrix *transform)
+{
+	t_lstmap	*node;
+
+	node = data->map->lstmap;
+	while (node != NULL)
+	{
+		__mat_vect_res_product(*transform, *(node->point3D),
+			&(node->transformed));
+		node = node->next;
+	}
+}
+
 void	__center_scale(t_data *data)
 {
-	const float		translate_v[3] = {-(data->map->nb_lines/2),
-		-(data->map->nb_columns/2), 0.0};
-	const float		s = fminf(WINDOW_HEIGHT / (data->map->nb_lines * 2.0),
-		WINDOW_WIDTH / (data->map->nb_columns * 2.0));
-	const float		scale_v[3] = {s, s,
-		s * (fminf(data->map->nb_lines, data->map->nb_columns) /
-		(2 * (data->map->range + 1)))}; //TODO : attention division par zero
-	// t_matrix		*mat_tab[3];
-	t_scale_matrix	*scale;
-	t_translation_matrix *translate;
-	t_matrix		affine;
-	
+	t_scale_matrix			*scale;
+	t_translation_matrix	*translate;
+	t_matrix				affine;
+	float					scale_v[3];
+	const float				translate_v[3] = {
+		- (data->map->nb_lines / 2),
+		- (data->map->nb_columns / 2), 0.0};
+
+	scale_v[0] = fminf(WINDOW_HEIGHT / (data->map->nb_lines * 2.0),
+			WINDOW_WIDTH / (data->map->nb_columns * 2.0));
+	scale_v[1] = scale_v[0];
+	scale_v[2] = scale_v[0] * (fminf(data->map->nb_lines,
+				data->map->nb_columns) / (2 * (data->map->range + 1)));
 	scale = __new_scale_matrix((float *)scale_v);
 	if (scale == NULL)
 		return (__quit(data, EXIT_FAILURE));
 	translate = __new_translation_matrix((float *)translate_v);
 	if (translate == NULL)
 		return (free(scale), __quit(data, EXIT_FAILURE));
-	
-	__multiple_mat_product(&affine, (t_matrix *[]){ &(translate->mat), &(scale->mat), NULL});
+	__multiple_mat_product(&affine, (t_matrix *[]){
+		&(translate->mat), &(scale->mat), NULL});
 	__apply_transform_to_map(data, &affine);
 	free(scale);
 	free(translate);
@@ -55,7 +69,7 @@ void	__center_scale(t_data *data)
 void	__isometric_projection(t_data *data)
 {
 	const float		center_v[3] = {WINDOW_HEIGHT / 2, WINDOW_WIDTH / 2, 0.0};
-	
+
 	t_matrix		*mat_tab[6];
 	t_matrix		affine;
 	t_rot_matrix	*rot_z;
@@ -82,7 +96,7 @@ void	__isometric_projection(t_data *data)
 	// mat_tab[4] = &(center->mat);
 	// mat_tab[5] = NULL;
 	mat_tab[2] = NULL;
-	
+
 	// printf("z angle = %f\n y angle = %f\n", rot_z->angle, rot_y->angle);
 	// __matrix_product(&tmp, rot_y->mat, rot_z->mat);
 	// printf("tmp =\n");
@@ -106,13 +120,8 @@ void	__put_map_to_im(t_data *data)
 
 	__reset_background(data);
 	node = data->map->lstmap;
-	// printf("data->img = %p\n", &(data->img));
 	while (node != NULL)
 	{
-		// printf("x = %i\t y = %i\tcolor = %X\n", node->point3D->x, node->point3D->y, node->color->val);
-		// __img_pix_put(&(data->img), node->point3D->y + (WINDOW_WIDTH / 2),
-		// 	node->point3D->x + (WINDOW_HEIGHT / 2),
-		// 	node->color->val);
 		if (node->right != NULL)
 			__trace_segment(data, node, node->right);
 		if (node->down != NULL)

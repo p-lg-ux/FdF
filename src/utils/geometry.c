@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/23 13:39:47 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/25 17:36:16 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ t_rot_matrix	*__new_rot_matrix(int axis, float angle)
 	[Y_AXIS] = &__fill_yrot_mat,
 	[Z_AXIS] = &__fill_zrot_mat,
 	};
-	
+
 	rot_mat = malloc(sizeof(t_rot_matrix));
 	if (rot_mat == NULL)
 		return (NULL);
@@ -187,18 +187,18 @@ void	__multiple_mat_product(t_matrix *res, t_matrix **mat_tab)
 {
 	int			i;
 	t_matrix	copy;
-	
+
 	if (mat_tab == NULL || *mat_tab == NULL)
 		return ;
 
 	// printf("mat_tab[0] =\n");
 	// __print_matrix(*(mat_tab[0]));
 	// printf("\n");
-	
+
 	// printf("mat_tab[1] =\n");
 	// __print_matrix(*(mat_tab[1]));
 	// printf("\n");
-	
+
 	__matrix_product(res, *(mat_tab[1]), *(mat_tab[0]));
 	i = 2;
 	printf("res =\n");
@@ -238,10 +238,21 @@ void	__matrix_product(t_matrix *res, t_matrix A, t_matrix B)
 void	__mat_vect_product(t_matrix m, t_point_i3 *vec)
 {
 	const int	v[3] = {vec->x, vec->y, vec->z};
-	
+
 	vec->x = rintf(v[0] * m[0][0] + v[1] * m[0][1] + v[2] * m[0][2] + m[0][3]);
 	vec->y = rintf(v[0] * m[1][0] + v[1] * m[1][1] + v[2] * m[1][2] + m[1][3]);
 	vec->z = rintf(v[0] * m[2][0] + v[1] * m[2][1] + v[2] * m[2][2] + m[2][3]);
+}
+
+void	__mat_vect_res_product(t_matrix m, t_point_i3 vec, t_point_i3 *res)
+{
+	const int	v[3] = {vec.x, vec.y, vec.z};
+
+	if (res == NULL)
+		return ;
+	res->x = rintf(v[0] * m[0][0] + v[1] * m[0][1] + v[2] * m[0][2] + m[0][3]);
+	res->y = rintf(v[0] * m[1][0] + v[1] * m[1][1] + v[2] * m[1][2] + m[1][3]);
+	res->z = rintf(v[0] * m[2][0] + v[1] * m[2][1] + v[2] * m[2][2] + m[2][3]);
 }
 
 void	__print_point_i3(t_point_i3 *p)
@@ -264,7 +275,7 @@ void	__print_matrix(t_matrix A)
 // 	t_matrix B = {{1.0, 2.0, 3.0}, {1.0, 2.0, 3.0}, {1.0, 2.0, 3.0}};
 // 	t_matrix C;
 // 	t_point_i3 v;
-	
+
 // 	printf("A =\n");
 // 	__print_matrix(A);
 // 	printf("\n");
@@ -289,6 +300,6 @@ void	__print_matrix(t_matrix A)
 // 	printf("A * v =\n");
 // 	__print_point_i3(&v);
 // 	printf("\n\n");
-	
+
 // 	return(0);
 // }

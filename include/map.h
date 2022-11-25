@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:16:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/19 16:01:10 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/25 17:50:21 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_lstmap
 {
 	t_point_i3		*point3D;
+	t_point_i3		transformed;
 	t_color			*color;
 	// struct s_lstmap	*up;
 	struct s_lstmap	*down;

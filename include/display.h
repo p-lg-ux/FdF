@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:41:00 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/24 18:16:33 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/25 17:52:56 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	__img_pix_put(t_img *img, int x, int y, int color);
 void	__put_map_to_im(t_data *data);
 
 void	__apply_transform_to_map(t_data *data, t_matrix *transform);
+void	__apply_transform(t_data *data, t_matrix *transform);
 void	__isometric_projection(t_data *data);
 void	__center_scale(t_data *data);
 
