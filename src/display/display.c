@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:01:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/25 17:48:40 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/26 17:18:38 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	__reset_background(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (data->img.mlx_img == NULL)
-		__quit(data, EXIT_FAILURE);
+		__quit(data, EXIT_FAILURE, "");
 	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &(data->img.bpp),
 		&(data->img.line_len), &(data->img.endian));
 	return ;
@@ -64,12 +64,9 @@ void	__mlx_display(t_data *data)
 	
 	ret = __initialize(data);
 	if (ret == MLX_ERROR)
-	{
-		printf("init error"); //TODO : remove printf
-		handle_leave(data);
-	}
+		__quit(data, EXIT_FAILURE, NULL);
 	__center_scale(data);
-	// __isometric_projection(data);
+	__set_isometric_projection(data->map);
 	__set_hooks(data);
 	__put_map_to_im(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
@@ -78,13 +75,3 @@ void	__mlx_display(t_data *data)
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 }
-
-// void	__free_data_content(t_data *data)
-// {
-// 	if (data->mlx_ptr != NULL)
-// 		free(data->mlx_ptr);
-// 	if (data->win_ptr != NULL)
-// 		free(data->win_ptr);
-// 	if (data->map != NULL)
-// 		__free_map(data->map);
-// }

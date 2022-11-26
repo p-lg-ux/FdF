@@ -30,9 +30,11 @@ SRCS =	main.c \
 		display/display_map.c \
 		display/handles.c \
 		display/segment.c \
+		geometry/geometry.c \
+		geometry/matrices.c \
+		geometry/fill_matrices.c \
 		utils/map.c \
 		utils/lstmap.c \
-		utils/geometry.c \
 		utils/color.c
 		# utils/strtab.c
 

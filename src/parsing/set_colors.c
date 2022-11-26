@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:44:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/23 16:06:07 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/26 16:59:03 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,46 +28,42 @@
 // 	return (to_t_color((R << 16) + (G << 8) + B));
 // }
 
-t_color	*__compute_color(t_lstmap *node, t_map *map)
+void	__set_rgb(int *rgb, float portion)
 {
-	int		R;
-	int		G;
-	int		B;
-	float	portion;
-
-	portion = (node->point3D->z - map->lowest->z) / ((float) (map->range));
 	if (portion < 0.25)
 	{
-		portion = portion / 0.25;
-		R = 0;
-		G = 0 + portion * 255;
-		B = 255;
-		return (to_t_color((R << 16) + (G << 8) + B));
+		rgb[0] = 0;
+		rgb[1] = 0 + (portion / 0.25) * 255;
+		rgb[2] = 255;
 	}
 	else if (portion >= 0.25 && portion < 0.5)
 	{
-		portion = (portion - 0.25) / 0.25;
-		R = 0;
-		G = 255;
-		B = 255 - portion * 255;
-		return (to_t_color((R << 16) + (G << 8) + B));
+		rgb[0] = 0;
+		rgb[1] = 255;
+		rgb[2] = 255 - ((portion - 0.25) / 0.25) * 255;
 	}
 	else if (portion >= 0.5 && portion < 0.75)
 	{
-		portion = (portion - 0.5) / 0.25;
-		R = 0 + portion * 255;
-		G = 255;
-		B = 0;
-		return (to_t_color((R << 16) + (G << 8) + B));
+		rgb[0] = 0 + ((portion - 0.5) / 0.25) * 255;
+		rgb[1] = 255;
+		rgb[2] = 0;
 	}
 	else
 	{
-		portion = (portion - 0.75) / 0.25;
-		R = 255;
-		G = 255 - portion * 255;
-		B = 0;
-		return (to_t_color((R << 16) + (G << 8) + B));
+		rgb[0] = 255;
+		rgb[1] = 255 - ((portion - 0.75) / 0.25) * 255;
+		rgb[2] = 0;
 	}
+}
+
+t_color	*__compute_color(t_lstmap *node, t_map *map)
+{
+	int		rgb[3];
+	float	portion;
+
+	portion = (node->point3D->z - map->lowest->z) / ((float)(map->range));
+	__set_rgb((int *) rgb, portion);
+	return (to_t_color((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]));
 }
 
 t_color	*__define_color(t_lstmap *node, t_map *map)
@@ -87,7 +83,7 @@ void	__set_links(t_lstmap *node, t_map *map)
 {
 	int			i;
 	t_lstmap	*tmp;
-	
+
 	if (node->point3D->y == map->nb_columns - 1)
 		node->right = NULL;
 	else
@@ -117,7 +113,6 @@ int	__set_colors(t_map *map)
 		node->color = __define_color(node, map);
 		if (node->color == NULL)
 			return (1);
-		// printf("R, G, B = %i, %i, %i\tcolor = %X\n", node->color->R, node->color->G, node->color->B, node->color->val);
 		__set_links(node, map);
 		node = node->next;
 	}

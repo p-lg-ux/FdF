@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/24 17:50:08 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/26 12:10:18 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		__add_point_to_map(t_map **map, int x, int y, int z);
 int		__count_columns(t_map **map, char *line);
 void	__count_lines_columns(t_map **map, int fd);
 void	__fill_map(t_map **map, int fd);
+void	__init_map(t_map *map);
 t_map	*__parse(char *filepath);
 
 //	set_colors.c

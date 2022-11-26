@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:43:07 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/17 15:09:18 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/26 12:20:43 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,14 @@ void	__check_lowest(t_map **map, t_point_i3 *point3D)
 			(*map)->lowest = point3D;
 	}
 	return ;
+}
+
+void	__init_map(t_map *map)
+{
+	map->param.angle_x = 0;
+	map->param.angle_y = 0;
+	map->param.angle_z = 0;
+	map->param.scale = 1;
+	map->param.t_x = 0;
+	map->param.t_y = 0;
 }

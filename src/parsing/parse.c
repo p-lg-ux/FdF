@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:04:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/23 13:33:40 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/26 18:16:09 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,13 @@ void	__count_lines_columns(t_map **map, int fd)
 void	__fill_map(t_map **map, int fd)
 {
 	__count_lines_columns(map, fd);
-	(*map)->range = (int)((*map)->highest->z) - (int)((*map)->lowest->z);
 	if ((*map)->nb_lines <= 0 || (*map)->nb_columns <= 0)
 	{
 		__free_map(*map);
 		*map = NULL;
 	}
+	(*map)->range = (int)((*map)->highest->z) - (int)((*map)->lowest->z);
+	__init_map(*map);
 }
 
 t_map	*__parse(char *filepath)

@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:25:46 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/23 18:31:35 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/26 18:13:33 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	__trace_segment(t_data *data, t_lstmap *A, t_lstmap *B)
 	float		dxy[2];
 	int			i;
 
-	dxy[0] = (float)(B->point3D->x - A->point3D->x);
-	dxy[1] = (float)(B->point3D->y - A->point3D->y);
+	dxy[0] = (float)(B->transformed.x - A->transformed.x);
+	dxy[1] = (float)(B->transformed.y - A->transformed.y);
 	if (fabs(dxy[0]) > fabs(dxy[1]))
 		step = fabs(dxy[0]);
 	else
@@ -42,8 +42,8 @@ void	__trace_segment(t_data *data, t_lstmap *A, t_lstmap *B)
 	dxy[0] = dxy[0] / step;
 	dxy[1] = dxy[1] / step;
 	i = 0;
-	xy[0] = A->point3D->x + (WINDOW_HEIGHT / 2);
-	xy[1] = A->point3D->y + (WINDOW_WIDTH / 2);
+	xy[0] = A->transformed.x + (WINDOW_HEIGHT / 2);
+	xy[1] = A->transformed.y + (WINDOW_WIDTH / 2);
 	while (i < step)
 	{
 		__img_pix_put(&(data->img), xy[1], xy[0],

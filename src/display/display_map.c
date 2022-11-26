@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:34:18 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/25 17:56:33 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/26 17:24:09 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	__center_scale(t_data *data)
 				data->map->nb_columns) / (2 * (data->map->range + 1)));
 	scale = __new_scale_matrix((float *)scale_v);
 	if (scale == NULL)
-		return (__quit(data, EXIT_FAILURE));
+		return (__quit(data, EXIT_FAILURE, NULL));
 	translate = __new_translation_matrix((float *)translate_v);
 	if (translate == NULL)
-		return (free(scale), __quit(data, EXIT_FAILURE));
+		return (free(scale), __quit(data, EXIT_FAILURE, NULL));
 	__multiple_mat_product(&affine, (t_matrix *[]){
 		&(translate->mat), &(scale->mat), NULL});
 	__apply_transform_to_map(data, &affine);
@@ -66,52 +66,31 @@ void	__center_scale(t_data *data)
 	free(translate);
 }
 
-void	__isometric_projection(t_data *data)
+void	__set_isometric_projection(t_map *map)
 {
-	const float		center_v[3] = {WINDOW_HEIGHT / 2, WINDOW_WIDTH / 2, 0.0};
+	__fill_rot_mat(&(map->mat_tab.iso_z), Z_AXIS, BETA);
+	__fill_rot_mat(&(map->mat_tab.iso_y), Y_AXIS, ALPHA);
+}
 
-	t_matrix		*mat_tab[6];
-	t_matrix		affine;
-	t_rot_matrix	*rot_z;
-	t_rot_matrix	*rot_y;
-	t_translation_matrix *center;
-
-	rot_z = __new_rot_matrix(Z_AXIS, BETA);
-	if (rot_z == NULL)
-		return ;
-	rot_y = __new_rot_matrix(Y_AXIS, ALPHA);
-	if (rot_y == NULL)
-		return (free(rot_z));
-	center = __new_translation_matrix((float *)center_v);
-	if (center == NULL)
-		return (free(rot_z), free(rot_y));
-	// printf("translate =\n");
-	// __print_matrix(translate->mat);
-	// printf("\n");
-	// printf("scale =\n");
-	// __print_matrix(scale->mat);
-	// printf("\n");
-	mat_tab[0] = &(rot_z->mat);
-	mat_tab[1] = &(rot_y->mat);
-	// mat_tab[4] = &(center->mat);
-	// mat_tab[5] = NULL;
-	mat_tab[2] = NULL;
-
-	// printf("z angle = %f\n y angle = %f\n", rot_z->angle, rot_y->angle);
-	// __matrix_product(&tmp, rot_y->mat, rot_z->mat);
-	// printf("tmp =\n");
-	// __print_matrix(tmp);
-	// printf("\n");
-	// __matrix_product(&affine, tmp, scale->mat);
-	// affine = &(scale->mat);
-	__multiple_mat_product(&affine, (t_matrix **)mat_tab);
-	// printf("affine =\n");
-	// __print_matrix(affine);
-	// printf("\n");
-	__apply_transform_to_map(data, &affine);
-	free(rot_z);
-	free(rot_y);
-	free(center);
+void	__set_map_transform(t_map *map)
+{
+	const float	s[3] = {map->param.scale, map->param.scale, map->param.scale};
+	const float t[3] = {map->param.t_x, map->param.t_y, 0};
+	
+	__fill_rot_mat(&(map->mat_tab.rot_x), X_AXIS, map->param.angle_x);
+	__fill_rot_mat(&(map->mat_tab.rot_y), Y_AXIS, map->param.angle_y);
+	__fill_rot_mat(&(map->mat_tab.rot_z), Z_AXIS, map->param.angle_z);
+	__fill_scale_mat(&(map->mat_tab.scale_s), (float *) s);
+	__fill_translation_mat(&(map->mat_tab.translate_t), (float *) t);
+	__multiple_mat_product(&(map->transform), (t_matrix *[]){
+		&(map->mat_tab.rot_x),
+		&(map->mat_tab.rot_y),
+		&(map->mat_tab.rot_z),
+		&(map->mat_tab.scale_s),
+		&(map->mat_tab.iso_z),
+		&(map->mat_tab.iso_y),
+		&(map->mat_tab.translate_t),
+		NULL});
 }
 
 void	__put_map_to_im(t_data *data)
@@ -119,6 +98,8 @@ void	__put_map_to_im(t_data *data)
 	t_lstmap *node;
 
 	__reset_background(data);
+	__set_map_transform(data->map);
+	__apply_transform(data, &(data->map->transform));
 	node = data->map->lstmap;
 	while (node != NULL)
 	{

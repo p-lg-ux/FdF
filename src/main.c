@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:04:48 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/25 17:46:27 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/26 17:51:13 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 		__free_map(map);
 		exit(EXIT_FAILURE);
 	}
-	__print_map(map);
+	// __print_map(map);
 	data.map = map;
 	__mlx_display(&data);
 	__free_map(map);
