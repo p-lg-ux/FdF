@@ -29,7 +29,11 @@ SRCS =	main.c \
 		display/display.c \
 		display/display_map.c \
 		display/handles.c \
+		display/handles_rot.c \
+		display/handles_zoom.c \
+		display/handles_translate.c \
 		display/segment.c \
+		display/transforms.c \
 		geometry/geometry.c \
 		geometry/matrices.c \
 		geometry/fill_matrices.c \

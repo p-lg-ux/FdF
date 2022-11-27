@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:41:00 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/26 17:19:51 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/28 00:13:28 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_data
 	t_map	*map;
 }	t_data;
 
+typedef void	(*t_ft_key_handle)(t_data *data);
+
 void	__quit(t_data *data, int exit_code, char *message);
 
 int		handle_no_event(t_data *data);
@@ -61,9 +63,23 @@ void	__apply_transform_to_map(t_data *data, t_matrix *transform);
 void	__apply_transform(t_data *data, t_matrix *transform);
 // void	__isometric_projection(t_data *data);
 void	__set_isometric_projection(t_map *map);
+void	__set_map_transform(t_map *map);
 void	__center_scale(t_data *data);
 
 void	__trace_segment(t_data *data, t_lstmap *A, t_lstmap *B);
 int		__degrade_color(t_color *begin, const float dRGB[3], int i, int step);
+
+void	__handle_rotz_pos(t_data *data);
+void	__handle_rotz_neg(t_data *data);
+void	__handle_roty_pos(t_data *data);
+void	__handle_roty_neg(t_data *data);
+void	__handle_rotx_pos(t_data *data);
+void	__handle_rotx_neg(t_data *data);
+void    __handle_zoom_pos(t_data *data);
+void    __handle_zoom_neg(t_data *data);
+void    __handle_tx_up(t_data *data);
+void    __handle_tx_down(t_data *data);
+void    __handle_ty_left(t_data *data);
+void    __handle_ty_right(t_data *data);
 
 #endif

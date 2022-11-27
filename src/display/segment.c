@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:25:46 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/26 18:13:33 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/27 16:22:07 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ int	__degrade_color(t_color *begin, const float dRGB[3], int i, int step)
 	return (to_val(t_ret));
 }
 
+void	__set_step(int *step, float dxy[2])
+{
+	if (fabs(dxy[0]) > fabs(dxy[1]))
+		*step = fabs(dxy[0]);
+	else
+		*step = fabs(dxy[1]);
+}
+
 void	__trace_segment(t_data *data, t_lstmap *A, t_lstmap *B)
 {
 	const float	drgb[3] = {B->color->R - A->color->R,
@@ -33,10 +41,7 @@ void	__trace_segment(t_data *data, t_lstmap *A, t_lstmap *B)
 
 	dxy[0] = (float)(B->transformed.x - A->transformed.x);
 	dxy[1] = (float)(B->transformed.y - A->transformed.y);
-	if (fabs(dxy[0]) > fabs(dxy[1]))
-		step = fabs(dxy[0]);
-	else
-		step = fabs(dxy[1]);
+	__set_step(&step, dxy);
 	if (step == 0)
 		return ;
 	dxy[0] = dxy[0] / step;
