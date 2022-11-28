@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   check_filepath.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 18:20:27 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 17:05:15 by pgros            ###   ########.fr       */
+/*   Created: 2022/11/28 17:52:00 by pgros             #+#    #+#             */
+/*   Updated: 2022/11/28 19:54:17 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "color.h"
+#include "fdf.h"
 
-t_color	*to_t_color(int val)
+int	__check_filepath(char *filepath)
 {
-	t_color	*ret;
+	int	len;
 
-	ret = malloc(sizeof(t_color));
-	if (ret == NULL)
-		return (NULL);
-	ret->val = val;
-	ret->R = (val & RED) >> 16;
-	ret->G = (val & GREEN) >> 8;
-	ret->B = (val & BLUE);
-	return (ret);
-}
-
-int	to_val(t_color color)
-{
-	int	val;
-
-	val = (color.R << 16) + (color.G << 8) + color.B;
-	return (val);
+	len = ft_strlen(filepath);
+	if (len <= 4)
+		return (1);
+	if (ft_strncmp(".fdf", filepath + (len - 4), 5) != 0)
+		return (1);
+	return (0);
 }

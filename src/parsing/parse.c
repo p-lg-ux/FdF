@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:04:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/26 18:16:09 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/28 18:06:27 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	__count_columns(t_map **map, char *line)
 void	__count_lines_columns(t_map **map, int fd)
 {
 	char		*line;
-	int			len;
 	int			col;
 
 	while (1)
@@ -73,6 +72,12 @@ void	__count_lines_columns(t_map **map, int fd)
 		if (line == NULL)
 			break ;
 		col = __count_columns(map, line);
+		if (col < 0)
+		{
+			(*map)->nb_columns = -1;
+			free(line);
+			break;
+		}
 		(*map)->nb_lines++;
 		if ((*map)->nb_columns == 0)
 			(*map)->nb_columns = col;
@@ -81,6 +86,13 @@ void	__count_lines_columns(t_map **map, int fd)
 			if (col != (*map)->nb_columns)
 				(*map)->nb_columns = -1;
 		}
+		free(line);
+	}
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
 		free(line);
 	}
 }
@@ -92,6 +104,7 @@ void	__fill_map(t_map **map, int fd)
 	{
 		__free_map(*map);
 		*map = NULL;
+		return ;
 	}
 	(*map)->range = (int)((*map)->highest->z) - (int)((*map)->lowest->z);
 	__init_map(*map);
@@ -102,6 +115,11 @@ t_map	*__parse(char *filepath)
 	t_map	*map;
 	int		fd;
 
+	if (__check_filepath(filepath) == 1)
+	{
+		ft_printf(EXTENSION_ERR_MESS);
+		exit(EXIT_FAILURE);
+	}
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
 	{
@@ -110,7 +128,7 @@ t_map	*__parse(char *filepath)
 	}
 	map = ft_calloc(1, sizeof(t_map));
 	if (map == NULL)
-		return (perror(""), NULL);
+		return (NULL);
 	__fill_map(&map, fd);
 	close(fd);
 	return (map);

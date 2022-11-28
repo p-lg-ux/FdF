@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:58:53 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 00:30:40 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/28 19:56:58 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	__quit(t_data *data, int exit_code, char *message)
 
 int	handle_no_event(t_data *data)
 {
+	(void)data;
 	return (0);
 }
 
@@ -88,18 +89,3 @@ int	handle_keypress(int keysym, t_data *data)
 	}
 	return (0);
 }
-
-	// if (keysym == XK_KP_Add)
-	// {
-	// 	data->map->param.scale += SCALE_UNIT;
-	// 	__put_map_to_im(data);
-	// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
-	// 	return (0);
-	// }
-	// if (keysym == XK_KP_Subtract)
-	// {
-	// 	data->map->param.scale -= SCALE_UNIT;
-	// 	__put_map_to_im(data);
-	// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
-	// 	return (0);
-	// }

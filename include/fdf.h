@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/26 12:10:18 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/28 18:58:59 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 // # define D_G			-46
 // # define D_B			-184
 
+# define EXTENSION_ERR_MESS	"File must have .fdf extension\n"
+
 # define COLOR_MAX		0xff0000 //red
 # define COLOR_MIN		0x0000ff //blue
 # define D_COLOR        0xfeff01
@@ -47,9 +49,6 @@
 # define D_R			255
 # define D_G			0
 # define D_B		    -255
-
-//for check secu malloc
-// # define malloc(...) 0
 
 //	parse_bis.c
 void	__check_lowest(t_map **map, t_point_i3 *point3D);
@@ -70,11 +69,10 @@ int		__set_colors(t_map *map);
 t_color	*__define_color(t_lstmap *node, t_map *map);
 t_color	*__compute_color(t_lstmap *node, t_map *map);
 
-//UTILS
+//	check_filepath.c
+int		__check_filepath(char *filepath);
 
-// t_str_tab
-// void	__free_strtab(t_strtab tab);
-// int		__strtab_len(t_strtab tab);
+//UTILS
 
 //t_map
 void	__print_map(t_map *map);

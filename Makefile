@@ -26,6 +26,7 @@ SRCS =	main.c \
 		parsing/parse.c \
 		parsing/parse_bis.c \
 		parsing/set_colors.c \
+		parsing/check_filepath.c \
 		display/display.c \
 		display/display_map.c \
 		display/handles.c \
@@ -50,7 +51,7 @@ INCS_FILES = fdf.h \
 				color.h \
 				display.h
 
-INCS = $(addprefix ./include/, $(INCS_FILES))
+INCS = $(addprefix include/, $(INCS_FILES))
 
 LIB42 = $(LIB42DIR)lib42.a
 LIBMLX = $(MLXDIR)libmlx.a
@@ -60,8 +61,8 @@ MLX_FLAGS = -L./$(MLXDIR) -lmlx
 LIB42_FLAGS = -L./$(LIB42DIR) -l42
 LIBS_FLAGS = $(LIB42_FLAGS) $(MLX_FLAGS) -lXext -lX11 -lm
 
-CC = cc 
-C_FLAGS = -Wall -Wextra -Werror -g3
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3 -g
 
 all: $(NAME)
 
@@ -71,7 +72,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 
 $(NAME): $(OBJS) $(INCS) $(LIB42) $(LIBMLX)
 	@echo -n "Compiling FdF"
-	@$(CC) $(CFLAGS) $(I_FLAG) $(OBJS) $(LIBS_FLAGS) -o $@
+	$(CC) $(CFLAGS) $(I_FLAG) $(OBJS) $(LIBS_FLAGS) -o $@
 	@echo ${GREEN}"\t\tOK"${RESET}
 		
 $(LIBMLX) :
