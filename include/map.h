@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:16:11 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/26 17:50:24 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 18:24:47 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_lstmap
 {
-	t_point_i3		*point3D;
+	t_point_i3		*point3d;
 	t_point_i3		transformed;
 	t_color			*color;
 	struct s_lstmap	*down;
@@ -47,7 +47,7 @@ void		__lstmap_clear(t_lstmap **lst);
 // t_lstmap	*__lstmap_map(t_lstmap *lst, void (*f)(void *));
 
 void		__free_map(t_map *map);
-// void		__print_map(t_map *map);
-// void		__print_lstmap(t_lstmap *maptab);
+void		__print_map(t_map *map);
+void		__print_lstmap(t_lstmap *maptab);
 
 #endif

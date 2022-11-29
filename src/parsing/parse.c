@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:04:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 18:06:27 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:00:53 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	__count_lines_columns(t_map **map, int fd)
 		{
 			(*map)->nb_columns = -1;
 			free(line);
-			break;
+			break ;
 		}
 		(*map)->nb_lines++;
 		if ((*map)->nb_columns == 0)
@@ -86,13 +86,6 @@ void	__count_lines_columns(t_map **map, int fd)
 			if (col != (*map)->nb_columns)
 				(*map)->nb_columns = -1;
 		}
-		free(line);
-	}
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
 		free(line);
 	}
 }

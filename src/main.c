@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:04:48 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/27 18:41:36 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 18:32:23 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		ft_printf("Error\n");
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 	map = __parse(argv[1]);
 	if (map == NULL)
+	{
+		ft_printf("Error\n");
 		return (1);
+	}
 	if (__set_colors(map) != 0)
 	{
 		ft_printf("Error\n");

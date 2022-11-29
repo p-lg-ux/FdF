@@ -6,11 +6,12 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/26 17:48:14 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 19:24:30 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "geometry.h"
+// #include "fdf.h"
 #include "lib42.h"
 #include <stdio.h>
 
@@ -93,7 +94,7 @@ void	__mat_vect_res_product(t_matrix m, t_point_i3 vec, t_point_i3 *res)
 // {
 // 	ft_printf("[ %i\t%i\t%i ]", p->x , p->y, p->z);
 // }
-
+// 
 // void	__print_matrix(t_matrix A)
 // {
 // 	printf("[\t%f\t%f\t%f\t%f\n", A[0][0], A[0][1], A[0][2], A[0][3]);

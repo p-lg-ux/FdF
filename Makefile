@@ -41,7 +41,6 @@ SRCS =	main.c \
 		utils/map.c \
 		utils/lstmap.c \
 		utils/color.c
-		# utils/strtab.c
 
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
@@ -66,13 +65,13 @@ CFLAGS = -Wall -Wextra -Werror -g3 -g
 
 all: $(NAME)
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
+$(OBJDIR)%.o: $(SRCDIR)%.c $(INCS)
 	@mkdir -p ${@D}
 	@$(CC) $(CFLAGS) $(I_FLAG) -c $< -o $@
 
 $(NAME): $(OBJS) $(INCS) $(LIB42) $(LIBMLX)
 	@echo -n "Compiling FdF"
-	$(CC) $(CFLAGS) $(I_FLAG) $(OBJS) $(LIBS_FLAGS) -o $@
+	@$(CC) $(CFLAGS) $(I_FLAG) $(OBJS) $(LIBS_FLAGS) -o $@
 	@echo ${GREEN}"\t\tOK"${RESET}
 		
 $(LIBMLX) :

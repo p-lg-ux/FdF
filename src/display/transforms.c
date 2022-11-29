@@ -6,11 +6,12 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:52:22 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/27 18:56:19 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 19:27:43 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+#include "fdf.h"
 
 void	__center_scale(t_data *data)
 {
@@ -19,11 +20,11 @@ void	__center_scale(t_data *data)
 	t_matrix				affine;
 	float					scale_v[3];
 	const float				translate_v[3] = {
-		- (data->map->nb_lines / 2),
-		- (data->map->nb_columns / 2), 0.0};
+		- rintf(data->map->nb_lines / 2),
+		- rintf(data->map->nb_columns / 2), 0.0};
 
-	scale_v[0] = fminf(WINDOW_HEIGHT / (data->map->nb_lines * 2.0),
-			WINDOW_WIDTH / (data->map->nb_columns * 2.0));
+	scale_v[0] = rintf(fminf(WINDOW_HEIGHT / (data->map->nb_lines * 2.0),
+				WINDOW_WIDTH / (data->map->nb_columns * 2.0)));
 	scale_v[1] = scale_v[0];
 	scale_v[2] = scale_v[0] * (fminf(data->map->nb_lines,
 				data->map->nb_columns) / (2 * (data->map->range + 1)));

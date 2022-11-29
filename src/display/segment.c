@@ -6,19 +6,20 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:25:46 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/27 16:22:07 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 18:36:09 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "display.h"
 #include "fdf.h"
 
 int	__degrade_color(t_color *begin, const float dRGB[3], int i, int step)
 {
 	t_color	t_ret;
 
-	t_ret.R = begin->R + ((int)((dRGB[0] * i) / step));
-	t_ret.G = begin->G + ((int)((dRGB[1] * i) / step));
-	t_ret.B = begin->B + ((int)((dRGB[2] * i) / step));
+	t_ret.r = begin->r + ((int)((dRGB[0] * i) / step));
+	t_ret.g = begin->g + ((int)((dRGB[1] * i) / step));
+	t_ret.b = begin->b + ((int)((dRGB[2] * i) / step));
 	return (to_val(t_ret));
 }
 
@@ -32,8 +33,8 @@ void	__set_step(int *step, float dxy[2])
 
 void	__trace_segment(t_data *data, t_lstmap *A, t_lstmap *B)
 {
-	const float	drgb[3] = {B->color->R - A->color->R,
-		B->color->G - A->color->G, B->color->B - A->color->B};
+	const float	drgb[3] = {B->color->r - A->color->r,
+		B->color->g - A->color->g, B->color->b - A->color->b};
 	int			step;
 	float		xy[2];
 	float		dxy[2];

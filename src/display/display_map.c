@@ -6,11 +6,12 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:34:18 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/27 18:54:00 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 15:51:02 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+// #include "fdf.h"
 #include <stdio.h>
 
 void	__apply_transform_to_map(t_data *data, t_matrix *transform)
@@ -20,7 +21,7 @@ void	__apply_transform_to_map(t_data *data, t_matrix *transform)
 	node = data->map->lstmap;
 	while (node != NULL)
 	{
-		__mat_vect_product(*transform, node->point3D);
+		__mat_vect_product(*transform, node->point3d);
 		node = node->next;
 	}
 }
@@ -32,7 +33,7 @@ void	__apply_transform(t_data *data, t_matrix *transform)
 	node = data->map->lstmap;
 	while (node != NULL)
 	{
-		__mat_vect_res_product(*transform, *(node->point3D),
+		__mat_vect_res_product(*transform, *(node->point3d),
 			&(node->transformed));
 		node = node->next;
 	}

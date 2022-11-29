@@ -6,11 +6,12 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:01:02 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/27 16:18:13 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 19:20:55 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+// #include "fdf.h"
 #include <stdio.h>
 
 void	__reset_background(t_data *data)

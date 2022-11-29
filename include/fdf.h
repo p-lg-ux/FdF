@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:05:29 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 18:58:59 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 15:55:13 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,10 @@
 # include	<sys/stat.h>
 # include	<fcntl.h>
 # include	"lib42.h"
-# include 	"geometry.h"
-# include 	"map.h"
+# include	"geometry.h"
+# include	"map.h"
 # include	"color.h"
 # include	"display.h"
-
-// # define COLOR_MAX		0xfea542 //orange
-// # define COLOR_MIN		0x55d3fa //blue
-// # define MAX_R			0xfe
-// # define MAX_G			0xa5
-// # define MAX_B			0x42
-// # define MIN_R			0x55
-// # define MIN_G			0xd3
-// # define MIN_B			0xfa
-// # define D_R			169
-// # define D_G			-46
-// # define D_B			-184
 
 # define EXTENSION_ERR_MESS	"File must have .fdf extension\n"
 

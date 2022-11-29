@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:38:14 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 15:25:49 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 19:24:11 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@
 // 	while (maptab != NULL && i < 700)
 // 	{
 // 		i++;
-// 		__print_point_i3(maptab->point3D);
+// 		__print_point_i3(maptab->point3d);
 // 		ft_printf("\tR, G, B = %i, %i, %i",
-// 			maptab->color->R, maptab->color->G, maptab->color->B);
+// 			maptab->color->r, maptab->color->g, maptab->color->b);
 // 		ft_printf("\tcolor = %X", maptab->color->val);
+// 		ft_printf("\tright :\t");
+// 		if (maptab->right != NULL)
+// 			__print_point_i3(maptab->right->point3d);
+// 		ft_printf("\tdown :\t");
+// 		if (maptab->down != NULL)
+// 			__print_point_i3(maptab->down->point3d);
 // 		ft_printf("\n");
 // 		maptab = maptab->next;
 // 	}

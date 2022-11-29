@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:44:51 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 19:54:37 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 15:34:23 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_color	*__compute_color(t_lstmap *node, t_map *map)
 	int		rgb[3];
 	float	portion;
 
-	portion = (node->point3D->z - map->lowest->z) / ((float)(map->range));
+	portion = (node->point3d->z - map->lowest->z) / ((float)(map->range));
 	__set_rgb((int *) rgb, portion);
 	return (to_t_color((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]));
 }
@@ -54,9 +54,9 @@ t_color	*__define_color(t_lstmap *node, t_map *map)
 {
 	t_color	*color;
 
-	if (node->point3D->z == map->lowest->z)
+	if (node->point3d->z == map->lowest->z)
 		color = to_t_color(COLOR_MIN);
-	else if (node->point3D->z == map->highest->z)
+	else if (node->point3d->z == map->highest->z)
 		color = to_t_color(COLOR_MAX);
 	else
 		color = __compute_color(node, map);
@@ -68,11 +68,11 @@ void	__set_links(t_lstmap *node, t_map *map)
 	int			i;
 	t_lstmap	*tmp;
 
-	if (node->point3D->y == map->nb_columns - 1)
+	if (node->point3d->y == map->nb_columns - 1)
 		node->right = NULL;
 	else
 		node->right = node->next;
-	if (node->point3D->x == map->nb_lines - 1)
+	if (node->point3d->x == map->nb_lines - 1)
 		node->down = NULL;
 	else
 	{

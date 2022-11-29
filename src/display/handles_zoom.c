@@ -6,11 +6,12 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 23:51:20 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 00:27:22 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:05:27 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+// #include "fdf.h"
 
 void	__handle_rotx_neg(t_data *data)
 {
@@ -28,6 +29,6 @@ void	__handle_zoom_pos(t_data *data)
 
 void	__handle_zoom_neg(t_data *data)
 {
-	if (data->map->param.scale - SCALE_UNIT > 0)
+	if (data->map->param.scale - SCALE_UNIT > 0.000001)
 		data->map->param.scale -= SCALE_UNIT;
 }

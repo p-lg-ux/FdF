@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:41:00 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 00:13:28 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 15:21:43 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
-	int		bpp; /* bits per pixel */
+	int		bpp;
 	int		line_len;
 	int		endian;
 }	t_img;
@@ -75,11 +75,11 @@ void	__handle_roty_pos(t_data *data);
 void	__handle_roty_neg(t_data *data);
 void	__handle_rotx_pos(t_data *data);
 void	__handle_rotx_neg(t_data *data);
-void    __handle_zoom_pos(t_data *data);
-void    __handle_zoom_neg(t_data *data);
-void    __handle_tx_up(t_data *data);
-void    __handle_tx_down(t_data *data);
-void    __handle_ty_left(t_data *data);
-void    __handle_ty_right(t_data *data);
+void	__handle_zoom_pos(t_data *data);
+void	__handle_zoom_neg(t_data *data);
+void	__handle_tx_up(t_data *data);
+void	__handle_tx_down(t_data *data);
+void	__handle_ty_left(t_data *data);
+void	__handle_ty_right(t_data *data);
 
 #endif

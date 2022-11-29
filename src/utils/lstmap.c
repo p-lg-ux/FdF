@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:48:33 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 16:51:20 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 15:52:44 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_lstmap	*__lstmap_new(t_point_i3 *point3D)
 	new_node = (t_lstmap *) ft_calloc(1, sizeof(t_lstmap));
 	if (!new_node)
 		return (new_node);
-	new_node->point3D = point3D;
+	new_node->point3d = point3D;
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -66,16 +66,16 @@ void	__lstmap_clear(t_lstmap **lst)
 	next = (*lst)->next;
 	while (next)
 	{
-		if ((*lst)->point3D != NULL)
-			free((*lst)->point3D);
+		if ((*lst)->point3d != NULL)
+			free((*lst)->point3d);
 		if ((*lst)->color != NULL)
 			free((*lst)->color);
 		free((*lst));
 		*lst = next;
 		next = next->next;
 	}
-	if ((*lst)->point3D != NULL)
-		free((*lst)->point3D);
+	if ((*lst)->point3d != NULL)
+		free((*lst)->point3d);
 	if ((*lst)->color != NULL)
 		free((*lst)->color);
 	free((*lst));

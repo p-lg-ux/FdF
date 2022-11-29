@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:20:27 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/28 17:05:15 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 15:52:37 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ t_color	*to_t_color(int val)
 	if (ret == NULL)
 		return (NULL);
 	ret->val = val;
-	ret->R = (val & RED) >> 16;
-	ret->G = (val & GREEN) >> 8;
-	ret->B = (val & BLUE);
+	ret->r = (val & RED) >> 16;
+	ret->g = (val & GREEN) >> 8;
+	ret->b = (val & BLUE);
 	return (ret);
 }
 
@@ -31,6 +31,6 @@ int	to_val(t_color color)
 {
 	int	val;
 
-	val = (color.R << 16) + (color.G << 8) + color.B;
+	val = (color.r << 16) + (color.g << 8) + color.b;
 	return (val);
 }

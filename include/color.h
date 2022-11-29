@@ -6,7 +6,7 @@
 /*   By: pgros <pgros@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:21:00 by pgros             #+#    #+#             */
-/*   Updated: 2022/11/14 14:58:21 by pgros            ###   ########.fr       */
+/*   Updated: 2022/11/29 15:32:21 by pgros            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 typedef struct s_color
 {
 	int	val;
-	int	R;
-	int	G;
-	int B;
+	int	r;
+	int	g;
+	int	b;
 }	t_color;
 
-t_color	*to_t_color(int	val);
+t_color	*to_t_color(int val);
 int		to_val(t_color color);
 
 #endif
